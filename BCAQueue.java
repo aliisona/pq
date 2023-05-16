@@ -1,4 +1,3 @@
-package pq;
 
 import java.util.NoSuchElementException;
 

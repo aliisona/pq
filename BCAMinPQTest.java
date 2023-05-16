@@ -1,5 +1,3 @@
-package pq;
-
 import java.util.Random;
 import java.util.NoSuchElementException;
 import java.util.Arrays;

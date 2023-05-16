@@ -1,4 +1,3 @@
-package pq;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -101,18 +100,29 @@ public class BCAMinPQ<E extends Comparable<E>> implements BCAQueue<E> {
   private void pushDown(int i) {
    
     if (i >= heap.size() || i < 0) return; 
+
     while (heap.get(i).compareTo(heap.get(leftChildOf(i))) > 0 && leftChildOf(i) < heap.size()) {
       if (i >= heap.size()) return; 
-      E left = heap.get(leftChildOf(i)); 
-      E right = heap.get(rightChildOf(i)); 
-      if (right.compareTo(left) > 0) {
+      /*E left = heap.get(leftChildOf(i)); 
+      E right = heap.get(rightChildOf(i));*/
+      int left = leftChildOf(i); 
+      int right = rightChildOf(i); 
+      if (left >= heap.size()) {
+        return; 
+      }
+      else if (right >= heap.size()) {
+        swap(i, leftChildOf(i)); 
+        break; 
+      } 
+      else if(heap.get(left).compareTo(heap.get(right)) < 0) {
         swap(i, leftChildOf(i)); 
         i = leftChildOf(i); 
       }
-      else if (rightChildOf(i) < heap.size() && left.compareTo(right) > 0) {
+      else if (heap.get(right).compareTo(heap.get(left)) < 0) {
         swap(i, rightChildOf(i)); 
         i = rightChildOf(i); 
-      } 
+      }
+    
       else {
         return; 
       }
@@ -139,7 +149,7 @@ public class BCAMinPQ<E extends Comparable<E>> implements BCAQueue<E> {
     }
     
     swap(1, heap.size()-1);
-    E temp = heap.remove(1);
+    E temp = heap.remove(heap.size()-1);
     pushDown(1);
 
     /* Remove minimum element in heap, maintaining both shape and heap properties*/
