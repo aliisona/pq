@@ -109,7 +109,7 @@ public class BCAMinPQ<E extends Comparable<E>> implements BCAQueue<E> {
         swap(i, leftChildOf(i)); 
         i = leftChildOf(i); 
       }
-      else if (left.compareTo(right) > 0) {
+      else if (rightChildOf(i) < heap.size() && left.compareTo(right) > 0) {
         swap(i, rightChildOf(i)); 
         i = rightChildOf(i); 
       } 
