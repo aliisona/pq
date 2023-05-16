@@ -104,7 +104,6 @@ public class BCAMinPQ<E extends Comparable<E>> implements BCAQueue<E> {
     if (i >= heap.size() || i < 0) return; 
     while (heap.get(i).compareTo(heap.get(leftChildOf(i))) > 0 && leftChildOf(i) < heap.size()) {
       if (i >= heap.size()) return; 
-      E current = heap.get(i); 
       E left = heap.get(leftChildOf(i)); 
       E right = heap.get(rightChildOf(i)); 
       if (right.compareTo(left) > 0) {
