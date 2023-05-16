@@ -127,28 +127,7 @@ public class BCAMinPQ<E extends Comparable<E>> implements BCAQueue<E> {
   
 }
 
-private void knockoff(int i) {
-  if (heap.get(i).compareTo(left) > 0 || heap.get(i).compareTo(right) > 0) {
-      
-    while(left != null) /*continue as long as i has at least 1 child  */{
-      /* pick the smaller child (there might only be one!) */
-      if (heap.get(leftChildOf(i)).compareTo(right) < 0) {
-        swap(i, leftChildOf(i)); 
-        i = leftChildOf(i); 
-        left = heap.get(i); 
-        
-      } else if (right.compareTo(left) < 0) {
-        swap(i, rightChildOf(i)); 
-        i = rightChildOf(i);
 
-      } else {
-        break; 
-      }
-      
-      /* Push element at i down!*/
-    }
-  }
-}
   /**
    * Removes the smallest item from the queue and returns it.
    *
