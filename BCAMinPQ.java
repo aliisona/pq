@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+//Help: Luna Lee with pushdown method errors 
+
 public class BCAMinPQ<E extends Comparable<E>> implements BCAQueue<E> {
 
   /*Stores items in heap starting at index 1*/
@@ -97,42 +99,29 @@ public class BCAMinPQ<E extends Comparable<E>> implements BCAQueue<E> {
    * This will fix the heap property if the element of index i
    * is the only element out of place.
    */
+
   private void pushDown(int i) {
-   
-    if (i >= heap.size() - 1|| i < 1) return; 
+    if (heap.size()> i) {
+      while(((leftChildOf(i) < heap.size()-1 && heap.get(i).compareTo(heap.get(leftChildOf(i))) > 0) || (rightChildOf(i) < heap.size()-1 && heap.get(i).compareTo(heap.get(rightChildOf(i))) > 0))) {  /*continue as long as i has at least 1 child  */{
+        
+        /* pick the smaller child (there might only be one!) */
+        if (rightChildOf(i) < heap.size()-1 && heap.get(leftChildOf(i)).compareTo(heap.get(rightChildOf(i))) < 0) {
+          swap(i, leftChildOf(i)); 
+          i = leftChildOf(i); 
+          
+        } else if (rightChildOf(i) < heap.size()-1) {
+          swap(i, rightChildOf(i)); 
+          i = rightChildOf(i);
+        } 
 
-    while (heap.get(i).compareTo(heap.get(leftChildOf(i))) > 0 && leftChildOf(i) < heap.size()) {
-      if (i >= heap.size() - 1) return; 
-      /*E left = heap.get(leftChildOf(i)); 
-      E right = heap.get(rightChildOf(i));*/
-      int left = leftChildOf(i); 
-      int right = rightChildOf(i); 
-     
-      if (right >= heap.size()) {
-        swap(i, leftChildOf(i)); 
-        break; 
-      } 
-      else if(heap.get(left).compareTo(heap.get(right)) < 0) {
-        swap(i, leftChildOf(i)); 
-        i = leftChildOf(i); 
-      }
-      else if (heap.get(right).compareTo(heap.get(left)) < 0) {
-        swap(i, rightChildOf(i)); 
-        i = rightChildOf(i); 
-      }
-    
-      else {
-        return; 
-      }
-
+        // left = heap.get(leftChildOf(i));
+        // right = heap.get(rightChildOf(i)); 
+        
+        /* Push element at i down!*/      }
     }
-
-    
-
-    
-  
-}
-
+    return;
+  }
+ }
 
   /**
    * Removes the smallest item from the queue and returns it.
